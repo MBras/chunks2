@@ -45,6 +45,17 @@ describe "Authentication" do
 
   describe "authorization" do
 
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+      
+      describe "when attempting to visit the new user page" do
+        before { visit new_user_path }
+        it { should_not have_title(full_title('Sign up')) }
+      end
+    end
+
+
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 

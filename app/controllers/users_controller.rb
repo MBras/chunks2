@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update, :show]
-  before_action :correct_user,   only: [:edit, :update, :show]
+  before_action :signed_in_user,     only: [:edit, :update, :show]
+  before_action :correct_user,       only: [:edit, :update, :show]
+  before_action :not_signed_in_user, only: [:new]
 
   def new
   	@user = User.new
@@ -50,6 +51,13 @@ class UsersController < ApplicationController
         redirect_to signin_url, notice: "Please sign in."
       end
     end
+
+    def not_signed_in_user
+      if signed_in?
+        redirect_to root_url, notice: "Can't access that page when logged in"
+      end
+    end
+
 
     def correct_user
       @user = User.find(params[:id])
