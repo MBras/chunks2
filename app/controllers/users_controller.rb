@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @chunks = @user.chunks
   end
 
   def edit
@@ -45,18 +46,6 @@ class UsersController < ApplicationController
 
     # Before filters
 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-
-    def not_signed_in_user
-      if signed_in?
-        redirect_to root_url, notice: "Can't access that page when logged in"
-      end
-    end
 
 
     def correct_user

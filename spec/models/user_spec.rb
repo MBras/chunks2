@@ -16,6 +16,10 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
+	it { should respond_to(:chunks) }
+	it { should respond_to(:todo_chunks) }
+	it { should respond_to(:recently_closed_chunks) }
+
 
 	it { should be_valid }
 
@@ -102,5 +106,32 @@ describe User do
 	describe "remember token" do
 		before { @user.save }
 		its(:remember_token) { should_not be_blank }
+	end
+
+	describe "chunk associations" do
+		before { @user.save }
+		let!(:open_chunk) do
+			FactoryGirl.create(:chunk, user: @user, status_id: 0)
+		end
+		let!(:recently_closed_chunk) do
+			FactoryGirl.create(:chunk, user: @user, status_id: 1, updated_at: 1.hour.ago)
+		end
+		let!(:old_closed_chunk) do
+			FactoryGirl.create(:chunk, user: @user, status_id: 1, updated_at: 1.day.ago)
+		end
+
+		describe "status" do
+			let(:unfollowed_post) do
+				FactoryGirl.create(:chunk, user: FactoryGirl.create(:user))
+			end
+
+			its(:todo_chunks) { should include(open_chunk) }
+			its(:todo_chunks) { should_not include(recently_closed_chunk) }
+			its(:todo_chunks) { should_not include(old_closed_chunk) }
+
+			its(:recently_closed_chunks) { should include(recently_closed_chunk) }
+			its(:recently_closed_chunks) { should_not include(open_chunk) }
+			its(:recently_closed_chunks) { should_not include(old_closed_chunk) }
+		end
 	end
 end

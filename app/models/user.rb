@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :chunks
+
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
 
@@ -16,6 +18,14 @@ class User < ActiveRecord::Base
 
 	def User.encrypt(token)
 		Digest::SHA1.hexdigest(token.to_s)
+	end
+
+	def todo_chunks
+		Chunk.where("Status_id=0")
+	end
+
+	def recently_closed_chunks
+		Chunk.where("Status_id=1 and updated_at > ?", 1.day.ago)
 	end
 
 	private

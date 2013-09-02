@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130826202755) do
+ActiveRecord::Schema.define(version: 20130829213735) do
+
+  create_table "chunks", force: true do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

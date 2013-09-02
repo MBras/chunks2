@@ -21,7 +21,7 @@ describe "Authentication" do
       it { should have_selector('div.alert.alert-error', text: 'Invalid') }
 
       describe "after visiting another page" do
-        before { click_link "Home" }
+        before { click_link "Chunks" }
         it { should_not have_selector('div.alert.alert-error') }
       end
     end
@@ -58,6 +58,13 @@ describe "Authentication" do
 
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Chunks controller" do
+        describe "submitting to the create action" do
+          before { post chunks_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end
 
       describe "when attempting to visit a protected page" do
         before do

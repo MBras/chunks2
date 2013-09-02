@@ -6,6 +6,9 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:chunk, user: user, description: "Foo", status_id: 0) }
+    let!(:m2) { FactoryGirl.create(:chunk, user: user, description: "Bar", status_id: 0) }
+
     before do
       sign_in user
       visit user_path(user)
@@ -13,6 +16,12 @@ describe "User pages" do
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
+
+    describe "chunks" do
+      it { should have_content(m1.description) }
+      it { should have_content(m2.description) }
+      it { should have_content(user.chunks.count) }
+    end
   end
 
   describe "signup page" do
