@@ -1,6 +1,12 @@
 <li id="<%= chunk.id %>">
-  <span class="description"><%= chunk.description %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(chunk.created_at) %> ago.
-  </span>
+	<span class="description"><%= chunk.description %></span>
+	<% if chunk.status_id == 0 %>
+		<span class="timestamp">
+			Posted <%= time_ago_in_words(chunk.created_at) %> ago.
+		</span>
+	<% else %>
+		<span class="timestamp">
+			Closed <%= time_ago_in_words(chunk.updated_at) %> ago.
+		</span>
+	<% end %>
 </li>
