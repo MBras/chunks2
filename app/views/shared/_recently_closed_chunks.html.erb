@@ -1,0 +1,6 @@
+<% if @recently_closed_chunks.any? %>
+  <h3>Recently closed chunks</h3>
+  <ol class="closed_chunks">
+    <%= render partial: 'shared/chunk', collection: @recently_closed_chunks %>
+  </ol>
+<% end %>

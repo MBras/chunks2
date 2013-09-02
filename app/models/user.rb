@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
 		Digest::SHA1.hexdigest(token.to_s)
 	end
 
+	def todo_chunks
+		Chunk.where("Status_id=0")
+	end
+
+	def recently_closed_chunks
+		Chunk.where("Status_id=1 and updated_at > ?", 1.day.ago)
+	end
+
 	private
 
 		def create_remember_token

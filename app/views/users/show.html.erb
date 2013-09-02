@@ -8,4 +8,12 @@
       </h1>
     </section>
   </aside>
+  <div class="span8">
+    <% if @user.chunks.any? %>
+      <h3>Chunks to do (<%= @user.chunks.count %>)</h3>
+      <ol class="chunks">
+        <%= render @chunks %>
+      </ol>
+    <% end %>
+  </div>
 </div>
