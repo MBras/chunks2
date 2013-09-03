@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
 	end
 
 	def todo_chunks
-		Chunk.where("Status_id=0")
+		chunks.where("Status_id=0")
 	end
 
 	def recently_closed_chunks
-		Chunk.where("Status_id=1 and updated_at > ?", 1.day.ago)
+		chunks.where("Status_id=1 and updated_at > ?", 1.day.ago)
 	end
 
 	private

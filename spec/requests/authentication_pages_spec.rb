@@ -30,7 +30,6 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
-      it { should have_title(user.name) }
       it { should have_link('Profile',     href: user_path(user)) }
       it { should have_link('Settings',    href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
@@ -64,6 +63,7 @@ describe "Authentication" do
           before { post chunks_path }
           specify { expect(response).to redirect_to(signin_path) }
         end
+
       end
 
       describe "when attempting to visit a protected page" do
@@ -110,6 +110,15 @@ describe "Authentication" do
         before { patch user_path(wrong_user) }
         specify { expect(response).to redirect_to(root_url) }
       end
+
+      let(:wrong_chunk) { FactoryGirl.create(:chunk, user: wrong_user, status_id: 0) }
+
+      # XXX this needs fixing
+      describe "visiting Chunks#event page" do
+        before { get "chunks/#{wrong_chunk.id}/events/0" }
+        it { should have_content('Wrong user') }
+      end
+
     end
   end
 end

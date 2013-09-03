@@ -26,5 +26,11 @@ module Chunks2
     # config.i18n.default_locale = :de
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    # FIX from http://stackoverflow.com/questions/5267998/rails-3-field-with-errors-wrapper-changes-the-page-appearance-how-to-avoid-t
+    # it breaks the red error color though
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+        "#{html_tag}".html_safe 
+    }
   end
 end
