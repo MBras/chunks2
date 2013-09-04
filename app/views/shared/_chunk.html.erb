@@ -1,4 +1,13 @@
 <li id="<%= chunk.id %>">
+	<% if chunk.status_id == 0 %>
+		<a href="chunks/<%= chunk.id %>/event/0">
+			<i class="icon-check"></i>
+		</a>
+	<% else %>
+		<a href="chunks/<%= chunk.id %>/event/1">
+			<i class="icon-refresh"></i>
+		</a>
+	<% end %>
 	<span class="description"><%= chunk.description %></span>
 	<% if chunk.status_id == 0 %>
 		<span class="timestamp">

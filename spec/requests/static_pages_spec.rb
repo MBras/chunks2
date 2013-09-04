@@ -30,7 +30,7 @@ describe "Static pages" do
         user.recently_closed_chunks.each do |item|
           expect(page).to have_selector("li##{item.id}", text: item.description)
 
-          # check for strikethrough for these recently closed chunks
+          # XXX check for strikethrough for these recently closed chunks
 
         end
       end

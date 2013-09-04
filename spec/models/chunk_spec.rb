@@ -4,7 +4,7 @@ describe Chunk do
 
   let(:user) { FactoryGirl.create(:user) }
   before do
-    @chunk = user.chunks.build(description: "Lorem ipsum", status_id: 1)
+    @chunk = user.chunks.build(description: "Lorem ipsum", status_id: 0)
   end
 
   subject { @chunk }

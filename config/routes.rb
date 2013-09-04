@@ -5,7 +5,7 @@ Chunks2::Application.routes.draw do
   
   root  'static_pages#home'
   
-  get '/chunks/:id/:event/:event_id' => 'chunks#event'
+  get '/chunks/:id/event/:event_id' => 'chunks#event'
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

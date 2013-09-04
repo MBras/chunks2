@@ -1,7 +1,6 @@
 class ChunksController < ApplicationController
   before_action :signed_in_user
-  # XXX not uitgezet omdat eerst de test goed moet zijn
-  #before_action :correct_user, only: [:event]
+  before_action :correct_user, only: [:event]
   
   def create
   	@chunk = current_user.chunks.build(chunk_params)
@@ -20,8 +19,21 @@ class ChunksController < ApplicationController
   end
 
   def event
-    # update the status of the chunk  
-    flash[:success] = "Perform event " + params['event_id'] + " on chunk " + params['id']
+    # for now I just implement 0 (close) and 1 (undo)
+    case params[:event_id]
+    when "0"
+      # close the status of the chunk  
+      @chunk.status_id = 1
+      @chunk.save
+      flash[:success] = "Chunk done!"
+    when "1"
+      # undo closing the chunk  
+      @chunk.status_id = 0
+      @chunk.save
+      flash[:success] = "Chunk opened again"
+    else
+      flash[:warning] = "Not implemented event "+params[:event_id]
+    end
     redirect_to root_url
   end
 

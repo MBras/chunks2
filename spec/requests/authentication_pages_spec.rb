@@ -111,14 +111,6 @@ describe "Authentication" do
         specify { expect(response).to redirect_to(root_url) }
       end
 
-      let(:wrong_chunk) { FactoryGirl.create(:chunk, user: wrong_user, status_id: 0) }
-
-      # XXX this needs fixing
-      describe "visiting Chunks#event page" do
-        before { get "chunks/#{wrong_chunk.id}/events/0" }
-        it { should have_content('Wrong user') }
-      end
-
     end
   end
 end
