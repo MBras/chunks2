@@ -1,7 +1,7 @@
 Chunks2::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :chunks, only: [:create]
+  resources :chunks, only: [:create, :destroy]
   
   root  'static_pages#home'
   

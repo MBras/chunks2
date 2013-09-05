@@ -4,10 +4,6 @@
 
 $grayMediumLight: #eaeaea;
 
-/* mixins, variables, etc. */
-
-$grayMediumLight: #eaeaea;
-
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -203,6 +199,15 @@ input {
   color: $grayLight;
   font-size: small;
 }
+.due_date {
+  font-size: small;
+}
+.category {
+  font-size: small;
+}
+
+
+
 .gravatar {
   float: left;
   margin-right: 10px;
