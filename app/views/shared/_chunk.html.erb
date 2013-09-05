@@ -1,21 +1,36 @@
 <li id="<%= chunk.id %>">
-	<% if chunk.status_id == 0 %>
-		<a href="chunks/<%= chunk.id %>/event/0">
-			<i class="icon-check"></i>
-		</a>
-	<% else %>
-		<a href="chunks/<%= chunk.id %>/event/1">
-			<i class="icon-refresh"></i>
-		</a>
-	<% end %>
-	<span class="description"><%= chunk.description %></span>
-	<% if chunk.status_id == 0 %>
-		<span class="timestamp">
-			(Posted <%= time_ago_in_words(chunk.created_at) %> ago)
+	<div class="main_chunk">
+		<%= link_to chunk, method: :delete,
+	                         data: { confirm: "You sure?" },
+	                        title: "Delete: " + chunk.description do %>
+			<i class="icon-remove"></i>
+		<% end %>                                     
+		<% if chunk.status_id == 0 %>
+			<a href="chunks/<%= chunk.id %>/event/0">
+				<i class="icon-check"></i>
+			</a>
+		<% else %>
+			<a href="chunks/<%= chunk.id %>/event/1">
+				<i class="icon-refresh"></i>
+			</a>
+		<% end %>
+		<span class="description"><%= chunk.description %></span>
+	</div>
+	<div class="chunk_extra_info">
+		<span class="category">
+			Category: <%= chunk.category %>
 		</span>
-	<% else %>
-		<span class="timestamp">
-			 (Closed <%= time_ago_in_words(chunk.updated_at) %> ago)
+		<span class="due_date">
+			Due date: <%= chunk.due_date %>
 		</span>
-	<% end %>
+		<% if chunk.status_id == 0 %>
+			<span class="timestamp">
+				(Posted <%= time_ago_in_words(chunk.created_at) %> ago)
+			</span>
+		<% else %>
+			<span class="timestamp">
+				 (Closed <%= time_ago_in_words(chunk.updated_at) %> ago)
+			</span>
+		<% end %>
+	</div>
 </li>

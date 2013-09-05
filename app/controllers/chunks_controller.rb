@@ -1,6 +1,6 @@
 class ChunksController < ApplicationController
   before_action :signed_in_user
-  before_action :correct_user, only: [:event]
+  before_action :correct_user, only: [:event, :destroy]
   
   def create
   	@chunk = current_user.chunks.build(chunk_params)
@@ -16,6 +16,11 @@ class ChunksController < ApplicationController
       @recently_closed_chunks = []
       render 'static_pages/home'
     end
+  end
+
+  def destroy
+    @chunk.destroy
+    redirect_to root_url
   end
 
   def event

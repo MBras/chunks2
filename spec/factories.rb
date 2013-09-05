@@ -8,6 +8,7 @@ FactoryGirl.define do
 
   factory :chunk do
     description "Lorem ipsum"
+    status_id 0
     user
   end
 end
