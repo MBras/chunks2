@@ -12,8 +12,8 @@ class ChunksController < ApplicationController
       flash[:success] = "Chunk created!"
       redirect_to root_url
     else
-      @todo_chunks = []
-      @recently_closed_chunks = []
+      @todo_chunks = current_user.todo_chunks
+      @recently_closed_chunks = current_user.recently_closed_chunks
       render 'static_pages/home'
     end
   end
