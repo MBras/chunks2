@@ -10,12 +10,12 @@ describe ChunksController do
 				get :event, id: @chunk1, event_id: "0"
 			end
 
-			it "redirects to the root page" do
-				expect(response).to redirect_to(root_url)
-			end
-
 			it "update the chunk status" do
 				expect(@chunk1.status_id).to eq(1)
+			end
+
+			it "redirects to the root page" do
+				expect(response).to redirect_to(root_url)
 			end
 		end
 
@@ -24,7 +24,7 @@ describe ChunksController do
       		before do
       			@chunk2 = FactoryGirl.create(:chunk, user_id: user.id, status_id: 0)
 				sign_in(wrong_user, no_capybara: true)
-				get :event, id: @chunk2, event_id: "0"
+				get :event, id: @chunk2, event_id: 0
 			end
 
 			it "shouldn't update the chunk status" do

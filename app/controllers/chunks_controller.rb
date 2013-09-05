@@ -20,6 +20,7 @@ class ChunksController < ApplicationController
 
   def event
     # for now I just implement 0 (close) and 1 (undo)
+    # for the full version we'll need the entire workflow mechanism and tables
     case params[:event_id]
     when "0"
       # close the status of the chunk  
