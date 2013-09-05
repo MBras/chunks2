@@ -11,7 +11,9 @@
 				<i class="icon-check"></i>
 			</a>
 			<span class="description"><%= chunk.description %></span>
+			<span class="timestamp">(Posted <%= time_ago_in_words(chunk.created_at) %> ago)</span>
 		</div>
+		<% if 0==1 #disable the form for now%>
 		<div class="chunk_extra_info">
 			
 			<%= form_for chunk, :index => chunk.id do |f| %>
@@ -20,22 +22,21 @@
 				<%= f.label :category %><%= f.text_field :category %>
 
 				<%= f.label :due_date %>
-				<div class="input-append date" id="dp<%= chunk.id %>" data-date="<%= Time.now.strftime("%m-%d-%Y") %>" data-date-format="dd-mm-yyyy">
+				<div class="input-append date" id="dp<%= chunk.id %>" 
+					                    data-date="<%= Time.now.strftime("%m-%d-%Y") %>" 
+					             data-date-format="dd-mm-yyyy">
 					<%= f.text_field :due_date %>
 					<span class="add-on"><i class="icon-calendar"></i></span>
 				</div>
-
-    		<% end %>
-			<script>
-				$(function(){
-					$('#dp<%= chunk.id %>').datepicker();
-				});
-			</script>
-
-    		<span class="timestamp">
-				(Posted <%= time_ago_in_words(chunk.created_at) %> ago)
-			</span>
+				
+				<script>
+					$(function(){
+						$('#dp<%= chunk.id %>').datepicker();
+					});
+				</script>
+			<% end %>
 		</div>
+		<% end %>
 	<% else %>
 		<a href="chunks/<%= chunk.id %>/event/1">
 			<i class="icon-refresh"></i>
