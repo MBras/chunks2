@@ -30,12 +30,4 @@ describe "Chunk pages" do
       end
     end
   end
-
-  describe "chunk destruction" do
-    before { FactoryGirl.create(:chunk, user: user) }
-
-    it "should delete a chunk" do
-      expect {click_link "delete" }.to change(Chunk, :count).by(-1)
-    end
-  end
 end
