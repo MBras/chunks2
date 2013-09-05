@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130829213735) do
+ActiveRecord::Schema.define(version: 20130905173656) do
 
   create_table "chunks", force: true do |t|
     t.string   "description"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20130829213735) do
     t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "due_date"
+    t.string   "category"
   end
 
   create_table "users", force: true do |t|

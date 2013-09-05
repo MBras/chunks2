@@ -12,6 +12,8 @@ describe Chunk do
   it { should respond_to(:description) }
   it { should respond_to(:user_id) }
   it { should respond_to(:status_id) }
+  it { should respond_to(:category) }
+  it { should respond_to(:due_date) }
   it { should respond_to(:user) }
   its(:user) { should eq user }
 
