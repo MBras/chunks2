@@ -168,6 +168,7 @@ input {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
+  display: inline;
 }
 
 /* chunks */
@@ -217,9 +218,4 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
-}
-
-
-.btn_navbar { 
-  margin-top: px 
 }
