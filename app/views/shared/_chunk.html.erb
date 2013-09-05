@@ -1,10 +1,11 @@
 <li id="<%= chunk.id %>">
 	<% if chunk.status_id == 0 %>
+
 		<div class="main_chunk">
 			<%= link_to chunk, method: :delete,
 		                         data: { confirm: "You sure?" },
 		                        title: "Delete: " + chunk.description do %>
-				<i class="icon-remove"></i>
+				<i class="icon-trash"></i>
 			<% end %>	
 			<a href="chunks/<%= chunk.id %>/event/0">
 				<i class="icon-check"></i>
@@ -12,13 +13,26 @@
 			<span class="description"><%= chunk.description %></span>
 		</div>
 		<div class="chunk_extra_info">
-			<span class="category">
-				Category: <%= chunk.category %>
-			</span>
-			<span class="due_date">
-				Due date: <%= chunk.due_date %>
-			</span>
-			<span class="timestamp">
+			
+			<%= form_for chunk, :index => chunk.id do |f| %>
+      			<%= f.text_field :description %>
+
+				<%= f.label :category %><%= f.text_field :category %>
+
+				<%= f.label :due_date %>
+				<div class="input-append date" id="dp<%= chunk.id %>" data-date="<%= Time.now.strftime("%m-%d-%Y") %>" data-date-format="dd-mm-yyyy">
+					<%= f.text_field :due_date %>
+					<span class="add-on"><i class="icon-calendar"></i></span>
+				</div>
+
+    		<% end %>
+			<script>
+				$(function(){
+					$('#dp<%= chunk.id %>').datepicker();
+				});
+			</script>
+
+    		<span class="timestamp">
 				(Posted <%= time_ago_in_words(chunk.created_at) %> ago)
 			</span>
 		</div>
