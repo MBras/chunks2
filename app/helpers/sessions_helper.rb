@@ -2,8 +2,13 @@ module SessionsHelper
 
   def sign_in(user)
     # XXX check dat dit sessies reset op andere pc's
+    # XXX remember me doet niet wat ik verwacht
     remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
+    if params[:remember_me]
+      cookies.permanent[:remember_token] = remember_token
+    else
+      cookies[:remember_token] = remember_token
+    end
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
   end

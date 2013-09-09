@@ -1,30 +1,58 @@
 <% if signed_in? %>
-  <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/chunk_form' %>
-      </section>
-    </aside>
-    <div class="span8">
-      <h3>Chunks to do...</h3>
-      <%= render 'shared/todo_chunks' %>
-      <%= render 'shared/recently_closed_chunks' %>
-    </div>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <section>
+      <%= render 'shared/chunk_form' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3>Chunks to do...</h3>
+    <%= render 'shared/todo_chunks' %>
+    <%= render 'shared/recently_closed_chunks' %>
   </div>
+</div>
 <% else %>
-  <div class="center hero-unit">
-    <h1>Welcome to Chunks</h1>
+<div class="center hero-unit">
+  <h1>Welcome to Chunks</h1>
 
-	<h2>
-		Get things done today
-	</h2>
+  <h2>
+    Get things done today
+  </h2>
 
-    <%= link_to "Sign up now!", signup_path,
-                                class: "btn btn-large btn-primary" %>
+  <div class="row">
+
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <%= f.text_field :email, class: "span4", placeholder: "E-mail" %>
+    </div>
+
+    <br>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-lock"></i></span>
+      <%= f.password_field :password, class: "span4", placeholder: "Password"  %>
+    </div>
+    <br>
+
+    <div class="field form-inline">
+      <%= check_box_tag :remember_me, 1, params[:remember_me] %> 
+      <%= label_tag :remember_me %>
+    </div>
+
+    <%= f.submit "Sign in", class: "btn btn-primary" %>
+    <% end %>
+
   </div>
+  <div class="row">
+    New user?<br>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
+</div>
 <% end %>
 
 
